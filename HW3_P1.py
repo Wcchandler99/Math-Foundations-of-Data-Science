@@ -14,7 +14,7 @@ M_spectral_radius = M_max_eigenvalue - M_min_eigenvalue
 max_spectral_radius_data = []
 #print(max_eigenvalue)
 x = 0
-for _ in range(100):
+for _ in range(200):
     neighbor_spectral_radius = []
     neighbors = []
     #print("M:")
@@ -60,7 +60,4 @@ M_spectral_radius = M_max_eigenvalue - M_min_eigenvalue
 print(M_spectral_radius)
 print(np.array_equal(M, M.T))
 plt.plot(max_spectral_radius_data)
-plt.savefig("plot.png")
-
-
-    
+plt.show()
