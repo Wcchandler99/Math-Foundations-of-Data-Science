@@ -8,8 +8,8 @@ A = np.random.normal(0, 1, (20, 20))
 #print(v)
 e = np.random.normal(0, 1, (20))
 #print(e)
-a_values = np.linspace(0.0001, 0.016, 10)
-b_values = np.linspace(0, .9, 5)
+a_values = np.linspace(0.0001, 0.02, 10)
+b_values = np.linspace(0, .9, 10)
 error_dict = {b: [] for b in b_values}
 for b in b_values:
     for a in a_values:
@@ -17,7 +17,7 @@ for b in b_values:
         v_old = v_current
         for _ in range(10):
             error = []
-            for _ in range(1000):
+            for _ in range(100):
                 ATA = np.dot(np.transpose(A), A)
                 ATAv = np.dot(ATA, v_current)
                 ATe = np.dot(np.transpose(A), e)
@@ -36,7 +36,7 @@ for b, errors in error_dict.items():
 
 plt.xlabel("Alpha Value (a)")
 plt.ylabel("Error")
-plt.ylim(0, .05)
+plt.ylim(0, 1)
 plt.title("Error vs Alpha Value for Different Beta Values")
 plt.legend()
 plt.grid()

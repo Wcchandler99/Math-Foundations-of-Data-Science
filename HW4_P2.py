@@ -46,7 +46,7 @@ N_test = 200
 lambda_values = []
 avg_test_errors = []
 #np.random.seed(6)
-lambda_values = np.linspace(0.0001, 0.01, 10)
+lambda_values = np.linspace(0, 1, 10)
 for lambda_test in lambda_values:
     test_errors = []
     for l in range(10):
