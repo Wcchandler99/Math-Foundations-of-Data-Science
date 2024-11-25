@@ -8,10 +8,11 @@ A = np.random.normal(0, 1, (20, 20))
 #print(v)
 b = np.random.normal(0, 1, (20))
 #print(e)
-a_values = np.linspace(0.0001, 0.015, 100)
+a = .01
+beta_values = np.linspace(0, 1, 100)
 
 avg_error_values = []
-for a in a_values:
+for beta in beta_values:
     error_values = []
     for _ in range(10):
         x_current = np.random.normal(0, 1, (20))
@@ -21,25 +22,24 @@ for a in a_values:
             ATAx = np.dot(ATA, x_current)
             ATb = np.dot(np.transpose(A), b)
             
-            x_new = x_current - a*(2*(ATAx) - 2*(ATb))
+            x_new = x_current - a*(2*(ATAx) - 2*(ATb)) + beta*(x_current - x_old)
             x_old = x_current
             x_current = x_new
-        print("Alpha: ", a, " error: ", np.square(np.linalg.norm(A@x_current-b)))
+        print("Beta: ", beta, " error: ", np.square(np.linalg.norm(A@x_current-b)))
         error = np.linalg.norm(A @ x_current - b)
         error_values.append(error)
     avg_error_values.append(np.mean(error_values))
 
 
 # Plot Error vs Alpha
-plt.plot(a_values, avg_error_values, marker='o', label="Error")
-plt.xlabel("Alpha Value (a)")
+plt.plot(beta_values, avg_error_values, marker='o', label="Error")
+plt.xlabel("Beta Value (b)")
 plt.ylabel("Error")
-plt.ylim(0, .6)
-plt.title("Error vs Alpha Value")
+plt.ylim(0, .8)
+plt.title("Error vs Beta Value")
 plt.legend()
 plt.grid()
 
 # Save and display the plot
-plt.savefig("error_vs_alpha.png")
+plt.savefig("error_vs_beta.png")
 plt.show()
-

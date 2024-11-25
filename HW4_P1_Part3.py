@@ -50,7 +50,7 @@ plt.annotate(f"{last_value:.10f}", xy=(len(cords2) - 1, last_value),
              fontsize=10)
 
 plt.legend()
-plt.savefig("plot1.png")
+plt.savefig("exp.png")
 plt.show()
 
 
