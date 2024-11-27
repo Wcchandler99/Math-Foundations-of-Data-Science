@@ -47,6 +47,8 @@ N_test = 50
 avg_test_errors = []
 
 k_values = np.linspace(50, 200, 151)
+
+lambda_test = .00001
 for k in k_values:
     test_errors = []
     for _ in range(30):
@@ -69,7 +71,7 @@ for k in k_values:
             Xwy = Xw-y_train
 
 
-            w = w - a*(1/N_train)*(2*(XTXw) - 2*(XTy))
+            w = w - a*(1/N_train)*(2*(XTXw) - 2*(XTy)) + 2*w*(lambda_test/101)
 
         test_errors.append((1/N_test)*np.linalg.norm(np.dot(X_test_proj, w) - y_test))
         print("k: ", k, " test error: ", (1/N_test)*np.linalg.norm(np.dot(X_test_proj, w) - y_test))

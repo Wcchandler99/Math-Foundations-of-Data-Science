@@ -1,17 +1,29 @@
-import sympy as sp
+import autograd.numpy as np
+from autograd import hessian
 
-# Define variables
-n = 3  # Number of variables (example size, adjust as needed)
-x = sp.Matrix(sp.symbols(f'x1:{n+1}'))  # Vector of variables
-A = sp.MatrixSymbol('A', n, n)  # Matrix A
-b = sp.MatrixSymbol('b', n, 1)  # Vector b
+# Set the random seed for reproducibility
+np.random.seed(6)
 
-# Define F(x) = ||Ax - b||^2
-Ax_b = sp.Matrix(A) * x - sp.Matrix(b)
-F = (Ax_b.T * Ax_b)[0]
+# Generate A, b, and x using NumPy
+A = np.random.normal(0, 1, (20, 20))
+b = np.random.normal(0, 1, (20))
+x = np.random.normal(0, 1, (20))
 
-# Compute the Hessian matrix
-Hessian = sp.hessian(F, x)
+# Define your function
+def my_function(x):
+    return np.linalg.norm(A @ x - b)
 
-# Print the result
-sp.pprint(Hessian)
+# Calculate the Hessian as a callable function
+hessian_function = hessian(my_function)
+
+# Evaluate the Hessian matrix at x
+hessian_matrix = hessian_function(x)
+
+print("Hessian matrix:")
+print(hessian_matrix)
+
+print("EigenValues: ")
+print(np.linalg.eigvals(hessian_matrix))
+
+print("Max EigenValue: ")
+print(max(np.linalg.eigvals(hessian_matrix)))

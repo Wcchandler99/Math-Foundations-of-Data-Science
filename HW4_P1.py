@@ -1,14 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-#np.random.seed(6)
+np.random.seed(6)
 A = np.random.normal(0, 1, (20, 20))
 
 
 #print(v)
 b = np.random.normal(0, 1, (20))
 #print(e)
-a_values = np.linspace(0.0001, 0.015, 100)
+a_values = np.linspace(0.0001, 1, 100)
 
 avg_error_values = []
 for a in a_values:
